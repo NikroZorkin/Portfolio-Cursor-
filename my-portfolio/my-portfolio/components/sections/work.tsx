@@ -63,18 +63,15 @@ export function WorkSection() {
 
           {/* Bento Grid for Projects with Stagger Animation (C4) */}
           <StaggerList className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
-            {projects.map((project, index) => {
-            // First project is large (featured)
-            const isFeatured = index === 0
-            const size = isFeatured ? 'lg' : index % 3 === 1 ? 'md' : 'sm'
-
+            {projects.map((project) => {
             return (
               <BentoCard
                 key={project.id}
-                size={size}
+                colSpan={{ default: 1, md: 1, lg: 1 }}
+                rowSpan={2}
                 interactive
                 noPadding
-                aspectRatio={isFeatured ? '16/10' : '4/3'}
+                aspectRatio="4/3"
                 className="group cursor-pointer"
               >
                 <div className="relative h-full w-full">
