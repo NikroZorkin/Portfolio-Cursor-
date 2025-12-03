@@ -16,12 +16,12 @@ import { trackEvent, AnalyticsEvents } from '@/lib/analytics'
 import { FloatingDock } from '@/components/ui/floating-dock'
 
 const navItems = [
-  { href: '#hero', title: 'Home', icon: <Home className="h-full w-full text-muted-fg" /> },
-  { href: '#work', title: 'Work', icon: <Briefcase className="h-full w-full text-muted-fg" /> },
-  { href: '#about', title: 'About', icon: <User className="h-full w-full text-muted-fg" /> },
-  { href: '#experience', title: 'Experience', icon: <Clock className="h-full w-full text-muted-fg" /> },
-  { href: '#skills', title: 'Skills', icon: <Wrench className="h-full w-full text-muted-fg" /> },
-  { href: '#contact', title: 'Contact', icon: <Mail className="h-full w-full text-muted-fg" /> },
+  { href: '#hero', title: 'Home', icon: <Home className="h-full w-full text-fg/70" /> },
+  { href: '#work', title: 'Work', icon: <Briefcase className="h-full w-full text-fg/70" /> },
+  { href: '#about', title: 'About', icon: <User className="h-full w-full text-fg/70" /> },
+  { href: '#experience', title: 'Experience', icon: <Clock className="h-full w-full text-fg/70" /> },
+  { href: '#skills', title: 'Skills', icon: <Wrench className="h-full w-full text-fg/70" /> },
+  { href: '#contact', title: 'Contact', icon: <Mail className="h-full w-full text-fg/70" /> },
 ]
 
 export function Header() {
