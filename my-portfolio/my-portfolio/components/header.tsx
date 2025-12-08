@@ -91,11 +91,12 @@ export function Header() {
               setTheme(newTheme)
               trackEvent(AnalyticsEvents.THEME_TOGGLE, { theme: newTheme })
             }}
-            className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-card-fg transition-colors hover:bg-accent hover:text-accent-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="relative flex aspect-square items-center justify-center rounded-lg transition-colors hover:bg-muted text-fg/70"
+            style={{ width: 50, height: 50 }}
             aria-label="Toggle theme"
           >
-            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           </button>
         </nav>
       </header>
