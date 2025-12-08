@@ -63,16 +63,16 @@ export function AboutSection() {
             <h3 className="text-base font-semibold text-card-fg">Interests</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-fg">
               <li className="flex items-center gap-2">
+                <SparklesIcon className="h-4 w-4 text-primary" />
+                AI-assisted design workflows
+              </li>
+              <li className="flex items-center gap-2">
                 <SwatchIcon className="h-4 w-4 text-primary" />
-                Visual Design
+                UX/UI for digital products
               </li>
               <li className="flex items-center gap-2">
                 <LightBulbIcon className="h-4 w-4 text-primary" />
-                User Psychology
-              </li>
-              <li className="flex items-center gap-2">
-                <DevicePhoneMobileIcon className="h-4 w-4 text-primary" />
-                Mobile-First Design
+                Exploring new AI & design tools
               </li>
             </ul>
           </BentoCard>

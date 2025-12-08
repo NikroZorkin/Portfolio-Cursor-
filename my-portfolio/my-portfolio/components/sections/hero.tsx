@@ -8,8 +8,31 @@ import { BentoCard } from '@/components/bento-card'
 import { MagneticButton } from '@/components/animations/magnetic-button'
 import { ParallaxImage } from '@/components/animations/parallax-image'
 import { SectionReveal } from '@/components/animations/section-reveal'
-import { experiences } from '@/components/sections/experience'
 import { trackCTAClick } from '@/lib/analytics'
+
+const experiences = [
+  {
+    title: 'Senior UX/UI Designer',
+    company: 'Tech Startup Inc',
+    period: '2021 - Present',
+    description:
+      'Leading design for a B2B SaaS platform, managing a team of 3 designers',
+  },
+  {
+    title: 'UX Designer',
+    company: 'Digital Agency',
+    period: '2019 - 2021',
+    description:
+      'Designed mobile and web applications for clients across various industries',
+  },
+  {
+    title: 'Junior Designer',
+    company: 'Creative Studio',
+    period: '2017 - 2019',
+    description:
+      'Started career creating marketing materials and landing pages',
+  },
+]
 import { heroProjects } from '@/lib/projects-data'
 import { siteConfig } from '@/lib/site-config'
 import {

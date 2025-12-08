@@ -8,7 +8,6 @@ import {
   Home, 
   Briefcase, 
   User, 
-  Clock, 
   Wrench, 
   Mail 
 } from 'lucide-react'
@@ -19,7 +18,6 @@ const navItems = [
   { href: '#hero', title: 'Home', icon: <Home className="h-full w-full text-fg/70" /> },
   { href: '#work', title: 'Work', icon: <Briefcase className="h-full w-full text-fg/70" /> },
   { href: '#about', title: 'About', icon: <User className="h-full w-full text-fg/70" /> },
-  { href: '#experience', title: 'Experience', icon: <Clock className="h-full w-full text-fg/70" /> },
   { href: '#skills', title: 'Skills', icon: <Wrench className="h-full w-full text-fg/70" /> },
   { href: '#contact', title: 'Contact', icon: <Mail className="h-full w-full text-fg/70" /> },
 ]
