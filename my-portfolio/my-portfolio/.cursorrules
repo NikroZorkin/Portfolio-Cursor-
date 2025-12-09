@@ -144,3 +144,16 @@ Lighthouse mobile ≥ 90.
 После: перечисли файлы и причины, укажи, какие пункты DoD/метрики затронуты.
 
 Один таск → малый дифф → проверка метрик → мерж.
+
+12) IMAGE GENERATION — команда /gen
+
+Когда пользователь пишет `/gen {описание}` — СРАЗУ запусти в ФОНОВОМ режиме (is_background: true):
+
+```
+cd my-portfolio\my-portfolio; npm run gen-image "описание на английском" "имя-файла.webp"
+```
+
+API ключ зашит в скрипте. Картинки: C:\Cursor Generate IMG
+Генерация занимает 30-60 сек — запускай ТОЛЬКО в background!
+
+Пример: `/gen anime girl gothic` → фоновая команда: `cd my-portfolio\my-portfolio; npm run gen-image "anime girl gothic style dark aesthetic" "anime-gothic.webp"`
