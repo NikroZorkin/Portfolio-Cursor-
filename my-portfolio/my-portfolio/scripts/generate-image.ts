@@ -1,22 +1,37 @@
 import Replicate from 'replicate'
-import { writeFile, mkdir } from 'fs/promises'
+import { writeFile, mkdir, readFile } from 'fs/promises'
 import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // ===== НАСТРОЙКИ =====
 const OUTPUT_DIR = 'C:\\Cursor Generate IMG'
-// Токен читается из переменной окружения REPLICATE_API_TOKEN
 // =====================
 
-// Токен передаётся через env (установи в системе или .env.local)
-const replicate = new Replicate({
-  auth: process.env.REPLICATE_API_TOKEN || '',
-})
+// Загружаем токен из .env.local
+async function loadToken(): Promise<string> {
+  try {
+    const envPath = path.join(__dirname, '..', '.env.local')
+    const content = await readFile(envPath, 'utf-8')
+    const match = content.match(/REPLICATE_API_TOKEN=(.+)/)
+    if (match) return match[1].trim()
+  } catch {}
+  if (process.env.REPLICATE_API_TOKEN) return process.env.REPLICATE_API_TOKEN
+  throw new Error('REPLICATE_API_TOKEN не найден! Добавь в .env.local')
+}
+
+let replicate: Replicate
 
 async function generateImage(prompt: string, filename: string) {
   console.log(`\n🎨 Генерация: "${prompt}"`)
   console.log(`📁 Сохранение: ${OUTPUT_DIR}\\${filename}`)
 
   try {
+    // Загружаем токен и инициализируем Replicate
+    const token = await loadToken()
+    replicate = new Replicate({ auth: token })
+
     // Создаём папку если нет
     await mkdir(OUTPUT_DIR, { recursive: true })
 
