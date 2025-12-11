@@ -81,7 +81,7 @@ export function ContactSection() {
                     id="name"
                     {...register('name')}
                     className="mt-2 w-full rounded-lg border border-border bg-bg px-4 py-2 text-fg placeholder:text-muted-fg focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                    placeholder="John Doe"
+                    placeholder="Your name"
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-destructive">
@@ -193,22 +193,22 @@ export function ContactSection() {
               <BentoCard className="flex flex-col">
                 <h3 className="text-lg font-semibold text-card-fg">Email</h3>
                 <a
-                  href="mailto:hello@janedoe.com"
+                  href="mailto:danilzorkin1402@gmail.com"
                   className="mt-2 text-primary hover:underline"
                 >
-                  hello@janedoe.com
+                  danilzorkin1402@gmail.com
                 </a>
               </BentoCard>
 
               <BentoCard className="flex flex-col">
                 <h3 className="text-lg font-semibold text-card-fg">Telegram</h3>
                 <a
-                  href="https://t.me/janedoe"
+                  href="https://t.me/danylo_zorkin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-2 text-primary hover:underline"
                 >
-                  @janedoe
+                  @danylo_zorkin
                 </a>
               </BentoCard>
 

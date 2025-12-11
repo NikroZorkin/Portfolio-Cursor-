@@ -129,7 +129,7 @@ export function BentoCard({
   
   const baseClassName = cn(
     // Base styles
-    'relative overflow-hidden rounded-xl border border-border bg-card transition-all duration-200',
+    'relative overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 ease-out',
     // Grid spans (custom or size-based)
     getColSpan(),
     getRowSpan(),
@@ -149,8 +149,12 @@ export function BentoCard({
     return (
       <motion.div
         className={baseClassName}
-        whileHover={{ scale: 1.03, y: -4 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        whileHover={{ scale: 1.02, y: -2 }}
+        transition={{ 
+          type: 'tween', 
+          ease: [0.25, 0.1, 0.25, 1], // cubic-bezier for smooth feel
+          duration: 0.3
+        }}
         {...props}
       >
         {children}
