@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 const skills = [
   {
     title: 'Core Design',
-    icon: '/devicon/icons/figma/figma-original.svg',
+    image: '/skills/core-design.webp',
     description: [
       'I design interfaces for web and mobile products that stay clean, simple, and easy to use.',
       'I like to bring order into products: design systems, components, and repeatable patterns so the whole product feels consistent.',
@@ -17,7 +17,7 @@ const skills = [
   },
   {
     title: 'UX',
-    icon: '/devicon/icons/sketch/sketch-original.svg',
+    image: '/skills/ux-research.webp',
     description: [
       'Before drawing anything, I think through what a person wants to achieve and how they will move from point A to point B.',
       'I focus on clear structure: navigation that makes sense, obvious priorities on the screen, and as few unnecessary steps as possible.',
@@ -26,7 +26,7 @@ const skills = [
   },
   {
     title: 'UI & Visual',
-    icon: '/devicon/icons/photoshop/photoshop-original.svg',
+    image: '/skills/ui-visual.webp',
     description: [
       'I work with composition, typography, and spacing so interfaces look tidy and readable.',
       'I build clear UI patterns: how buttons, forms, cards, and error or loading states behave.',
@@ -35,7 +35,7 @@ const skills = [
   },
   {
     title: 'Tools',
-    icon: '/devicon/icons/xd/xd-original.svg',
+    image: '/skills/design-tools.webp',
     description: [
       'Figma is my main workspace: auto‑layout, components, variants, styles, and full design systems.',
       'I use Photoshop when I need to prepare or clean up graphics for interfaces.',
@@ -44,7 +44,7 @@ const skills = [
   },
   {
     title: 'AI & Automation',
-    icon: '/devicon/icons/tensorflow/tensorflow-original.svg',
+    image: '/skills/ai-automation.webp',
     description: [
       'I am interested in how AI can speed up design work, from early ideation to quick high‑fidelity concepts.',
       'I use AI as a practical helper for finding references, generating interface options, and drafting text.',
@@ -53,7 +53,7 @@ const skills = [
   },
   {
     title: 'Design & Code',
-    icon: '/devicon/icons/react/react-original.svg',
+    image: '/skills/design-code.webp',
     description: [
       'I care about how design turns into code, so I try to create layouts that are straightforward to implement.',
       'I think through states, logic, and element behavior at the design stage, so there are no undefined screens later.',
@@ -64,11 +64,11 @@ const skills = [
 
 function SkillCard({
   title,
-  icon,
+  image,
   description,
 }: {
   title: string
-  icon: string
+  image: string
   description: string[]
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -84,22 +84,13 @@ function SkillCard({
     setDirection(directions[d])
   }
 
-  const variants = {
-    initial: { x: 0, y: 0 },
-    exit: { x: 0, y: 0 },
-    top: { y: 20 },
-    bottom: { y: -20 },
-    left: { x: 20 },
-    right: { x: -20 },
-  }
-
   const textVariants = {
-    initial: { opacity: 0, y: 0, x: 0 },
-    exit: { opacity: 0, y: 0, x: 0 },
-    top: { opacity: 1, y: -10 },
-    bottom: { opacity: 1, y: 10 },
-    left: { opacity: 1, x: -10 },
-    right: { opacity: 1, x: 10 },
+    initial: { opacity: 0, y: 10 },
+    exit: { opacity: 0, y: 10 },
+    top: { opacity: 1, y: 0 },
+    bottom: { opacity: 1, y: 0 },
+    left: { opacity: 1, y: 0 },
+    right: { opacity: 1, y: 0 },
   }
 
   return (
@@ -115,34 +106,41 @@ function SkillCard({
           whileHover={direction}
           exit="exit"
         >
-          {/* Dark overlay on hover */}
-          <motion.div className="absolute inset-0 z-10 bg-black/60 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
-
-          {/* Icon background */}
-          <motion.div
-            variants={variants}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="flex h-full w-full flex-col items-center justify-center bg-card p-6"
-          >
+          {/* Background image */}
+          <div className="absolute inset-0">
             <img
-              src={icon}
+              src={image}
               alt={title}
-              className="h-20 w-20 object-contain opacity-80 transition-transform duration-300 group-hover/card:scale-110"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-110"
             />
-            <h3 className="mt-4 text-xl font-bold text-fg">{title}</h3>
-          </motion.div>
+          </div>
+
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          {/* Title always visible at bottom */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 p-5 z-10 transition-opacity duration-300 group-hover/card:opacity-0"
+            style={{ fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }}
+          >
+            <h3 className="text-lg font-medium text-white">{title}</h3>
+          </div>
+
+          {/* Dark overlay on hover */}
+          <motion.div className="absolute inset-0 z-10 bg-black/70 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
 
           {/* Text content on hover */}
           <motion.div
             variants={textVariants}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="absolute inset-0 z-20 flex flex-col justify-center p-6 opacity-0 group-hover/card:opacity-100"
+            className="absolute inset-0 z-20 flex flex-col justify-center p-5 opacity-0 group-hover/card:opacity-100"
+            style={{ fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif' }}
           >
-            <h3 className="mb-4 text-lg font-bold text-white">{title}</h3>
+            <h3 className="mb-3 text-base font-medium tracking-normal text-white">{title}</h3>
             <ul className="space-y-2">
               {description.map((item, i) => (
-                <li key={i} className="text-xs leading-relaxed text-white/90">
-                  • {item}
+                <li key={i} className="text-[12px] leading-[1.7] font-normal text-white/80">
+                  {item}
                 </li>
               ))}
             </ul>
@@ -167,7 +165,7 @@ export function SkillsSection() {
               <SkillCard
                 key={skill.title}
                 title={skill.title}
-                icon={skill.icon}
+                image={skill.image}
                 description={skill.description}
               />
             ))}

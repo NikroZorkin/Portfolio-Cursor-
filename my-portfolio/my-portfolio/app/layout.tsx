@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { geistSans, geistMono } from '@/lib/fonts'
+import { geistSans, geistMono, inter } from '@/lib/fonts'
 import { ThemeProvider } from '@/components/theme-provider'
 import { JsonLd } from '@/components/json-ld'
 import { heroProjects } from '@/lib/projects-data'
@@ -72,7 +72,7 @@ export default function RootLayout({
         <JsonLd projects={heroProjects} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

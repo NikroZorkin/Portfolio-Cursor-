@@ -6,6 +6,7 @@
   /* Font families */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
 
   /* Color mappings for Tailwind */
   --color-bg: var(--bg);
