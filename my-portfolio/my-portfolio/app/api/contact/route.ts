@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { contactFormSchema } from '@/lib/validations/contact'
 import { rateLimit, getClientIdentifier } from '@/lib/rate-limit'
+import { sendDiscordNotification } from '@/lib/discord'
 
 export async function POST(request: Request) {
   try {
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const { name, email, budget, message, website } = result.data
+    const { name, email, message, website } = result.data
 
     // 3. Honeypot check
     if (website && website.length > 0) {
@@ -47,19 +48,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true })
     }
 
-    // 4. TODO: Send email via Resend/SMTP
+    // 4. Send Discord notification
     console.log('[Contact Form] Valid submission:', {
       name,
       email,
-      budget,
       message: message.substring(0, 50) + '...',
     })
 
-    // Mock email sending
-    // await sendEmail({ to: 'hello@example.com', from: email, subject: 'Contact Form', body: message })
-
-    // 5. TODO: Send Telegram notification
-    // await sendTelegramMessage({ chatId: process.env.TELEGRAM_CHAT_ID, text: `New contact: ${name} (${email})` })
+    const discordSent = await sendDiscordNotification({ name, email, message })
+    
+    if (!discordSent) {
+      console.error('[Contact Form] Failed to send Discord notification')
+      // Still return success to user, but log the error
+    }
 
     return NextResponse.json(
       { success: true },

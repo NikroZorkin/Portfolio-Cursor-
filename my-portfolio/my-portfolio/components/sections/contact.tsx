@@ -4,13 +4,46 @@ import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion, useInView } from 'framer-motion'
+import { ArrowUpRight, Copy, Check } from 'lucide-react'
 import { BentoCard } from '@/components/bento-card'
+import { PdfExport } from '@/components/pdf-export'
 import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact'
 import { trackEvent, AnalyticsEvents } from '@/lib/analytics'
 
 // Apple-style smooth easing
 const smoothEase = [0.25, 0.4, 0.25, 1]
+
+// Copy button component
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="ml-2 p-1.5 rounded-md text-muted-fg hover:text-fg hover:bg-white/10 transition-all duration-200"
+      aria-label={copied ? 'Copied!' : 'Copy to clipboard'}
+    >
+      {copied ? (
+        <Check className="h-4 w-4 text-green-500" />
+      ) : (
+        <Copy className="h-4 w-4" />
+      )}
+    </button>
+  )
+}
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -225,28 +258,40 @@ export function ContactSection() {
           {/* Contact Info */}
           <div className="flex flex-col gap-6">
             <motion.div variants={cardVariants}>
-              <BentoCard className="flex flex-col">
-                <h3 className="text-lg font-semibold text-card-fg">Email</h3>
+              <BentoCard className="group relative flex flex-col hover:bg-[#1A1A1A] transition-colors duration-300">
                 <a
                   href="mailto:danilzorkin1402@gmail.com"
-                  className="mt-2 text-primary hover:underline"
-                >
-                  danilzorkin1402@gmail.com
-                </a>
+                  className="absolute inset-0 z-10"
+                  aria-label="Send email"
+                />
+                <ArrowUpRight className="absolute right-3 top-3 h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:right-4 md:top-4" />
+                <h3 className="text-lg font-semibold text-card-fg">Email</h3>
+                <div className="mt-2 flex items-center">
+                  <span className="text-primary">danilzorkin1402@gmail.com</span>
+                  <div className="relative z-20">
+                    <CopyButton text="danilzorkin1402@gmail.com" />
+                  </div>
+                </div>
               </BentoCard>
             </motion.div>
 
             <motion.div variants={cardVariants}>
-              <BentoCard className="flex flex-col">
-                <h3 className="text-lg font-semibold text-card-fg">GitHub</h3>
+              <BentoCard className="group relative flex flex-col hover:bg-[#1A1A1A] transition-colors duration-300">
                 <a
                   href="https://github.com/NikroZorkin"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 text-primary hover:underline"
-                >
-                  @NikroZorkin
-                </a>
+                  className="absolute inset-0 z-10"
+                  aria-label="Visit GitHub profile"
+                />
+                <ArrowUpRight className="absolute right-3 top-3 h-4 w-4 text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 md:right-4 md:top-4" />
+                <h3 className="text-lg font-semibold text-card-fg">GitHub</h3>
+                <div className="mt-2 flex items-center">
+                  <span className="text-primary">@NikroZorkin</span>
+                  <div className="relative z-20">
+                    <CopyButton text="NikroZorkin" />
+                  </div>
+                </div>
               </BentoCard>
             </motion.div>
 
@@ -259,6 +304,11 @@ export function ContactSection() {
                   Usually within 24 hours
                 </p>
               </BentoCard>
+            </motion.div>
+
+            {/* PDF Export */}
+            <motion.div variants={cardVariants}>
+              <PdfExport />
             </motion.div>
           </div>
         </div>
