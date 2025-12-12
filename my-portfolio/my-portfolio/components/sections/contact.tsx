@@ -238,14 +238,14 @@ export function ContactSection() {
 
             <motion.div variants={cardVariants}>
               <BentoCard className="flex flex-col">
-                <h3 className="text-lg font-semibold text-card-fg">Telegram</h3>
+                <h3 className="text-lg font-semibold text-card-fg">GitHub</h3>
                 <a
-                  href="https://t.me/danylo_zorkin"
+                  href="https://github.com/NikroZorkin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-2 text-primary hover:underline"
                 >
-                  @danylo_zorkin
+                  @NikroZorkin
                 </a>
               </BentoCard>
             </motion.div>
